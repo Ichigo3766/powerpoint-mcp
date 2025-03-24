@@ -1,6 +1,10 @@
-# powerpoint MCP server
+# Powerpoint MCP server
 
 A MCP server project that creates powerpoint presentations
+
+## Main Changes of this fork
+
+Uses Stable Diffusion (ForgeUI/Automatic-1111) API instead of together ai.
 
 ## Components
 

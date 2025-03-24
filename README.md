@@ -2,10 +2,6 @@
 
 A MCP server project that creates powerpoint presentations
 
-<a href="https://glama.ai/mcp/servers/h1wl85c8gs">
-  <img width="380" height="200" src="https://glama.ai/mcp/servers/h1wl85c8gs/badge" alt="Powerpoint Server MCP server" />
-</a>
-
 ## Components
 
 ### Tools
@@ -39,26 +35,28 @@ The server implements multiple tools:
 - ```save-presentation```: Saves the presentation to a file.
   - Takes "presentation_name" as required arguments.
   - Saves the presentation to the folder_path. The client must call this tool to finalize the process.
-- ```generate-and-save-image```: Generates an image for the presentation using a FLUX model
+- ```generate-and-save-image```: Generates an image for the presentation using a T2I model
   - Takes "prompt" and "file_name" as required string arguments
-  - Creates an image using the free FLUX model on TogetherAI (requires an API key)
+  - Creates an image using stable diffusion api (ForgeUI/Automatic1111)
 
 ## Configuration
 
-An environment variable is required for image generation via TogetherAI
-Register for an account: https://api.together.xyz/settings/api-keys
+An environment variable is required for image generation via ForgeUI API
 
 ```
-"env": {
-        "TOGETHER_API_KEY": "api_key"
-      }
+"env": 
+{
+  "SD_WEBUI_URL": "http://your-sd-webui-url:7860",
+  "SD_AUTH_USER": "your-username",  // Optional: if authentication is enabled
+  "SD_AUTH_PASS": "your-password",  // Optional: if authentication is enabled
+}
 ```
 
 A folder_path is required. All presentations and images will be saved to this folder.
 
 ```
 "--folder-path",
-        "/path/to/decks_folder"
+  "/path/to/decks_folder"
 ```
 
 ## Quickstart
@@ -80,15 +78,15 @@ powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | ie
 #### Clone the repo
 
 ```
-git clone https://github.com/supercurses/powerpoint.git
+git clone https://github.com/Ichigo3766/powerpoint-mcp.git
 ```
 
-#### Claude Desktop
+#### Claude Desktop (works with any mcp client)
 
 On MacOS: `~/Library/Application\ Support/Claude/claude_desktop_config.json`
 On Windows: `%APPDATA%/Claude/claude_desktop_config.json`
 
-- ```--directory```: the path where you cloned the repo above
+- ```--directory```: the path where you cloned the repo above (ex: /full/path/to/powerpoint-mcp/src)
 - ```--folder-path```: the path where powerpoint decks and images will be saved to. Also the path where you should place any images you want the MCP server to use.
 
 ```
@@ -97,7 +95,9 @@ On Windows: `%APPDATA%/Claude/claude_desktop_config.json`
     "powerpoint": {
       "command": "uv",
       "env": {
-        "TOGETHER_API_KEY": "api_key"
+        "SD_WEBUI_URL": "http://your-sd-webui-url:7860",
+        "SD_AUTH_USER": "your-username",  // Optional: if authentication is enabled
+        "SD_AUTH_PASS": "your-password",  // Optional: if authentication is enabled
       },
       "args": [
         "--directory",
@@ -108,6 +108,7 @@ On Windows: `%APPDATA%/Claude/claude_desktop_config.json`
         "/path/to/decks_folder"
       ]
     }
+  }
 ```
 
 ### Usage Examples
@@ -124,9 +125,12 @@ author.jpeg
 Assuming you have SQLite MCP Server installed.
 ```
 Review 2024 Sales Data table. Create a presentation showing current trends, use tables and charts as appropriate
-
 ```
 
-# License
+## Credits
+
+This project is a fork of [powerpoint](https://github.com/supercurses/powerpoint) by [supercurses](https://github.com/supercurses), with additional features and modifications. The original project provided the foundation for this MCP server.
+
+## License
 
 This MCP server is licensed under the MIT License. This means you are free to use, modify, and distribute the software, subject to the terms and conditions of the MIT License. For more details, please see the LICENSE file in the project repository.

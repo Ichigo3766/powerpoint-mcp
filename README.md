@@ -2,6 +2,10 @@
 
 A MCP server project that creates powerpoint presentations
 
+<a href="https://glama.ai/mcp/servers/@Ichigo3766/powerpoint-mcp">
+  <img width="380" height="200" src="https://glama.ai/mcp/servers/@Ichigo3766/powerpoint-mcp/badge" alt="PowerPoint Server MCP server" />
+</a>
+
 ## Main Changes of this fork
 
 Uses Stable Diffusion (ForgeUI/Automatic-1111) API instead of together ai.
